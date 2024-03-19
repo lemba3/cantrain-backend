@@ -1,0 +1,22 @@
+version: '3.8'
+services:
+  db:
+    container_name: cantrain-db
+    image: postgres:14.1-alpine
+    environment:
+      - POSTGRES_USER=postgresuser
+      - POSTGRES_PASSWORD=postgrespass
+      - POSTGRES_DB=cantrain-server
+    networks:
+      - local
+    ports:
+      - '5434:5432'
+    volumes:
+      - ./db:/var/lib/postgresql/data
+
+networks:
+  local:
+    name: local
+    driver: bridge
+volumes:
+  postgres_data:
