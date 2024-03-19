@@ -6,9 +6,9 @@ export class UpdateUserDto implements IUserDataUpdate {
   @IsString()
   username: string;
 
-  @IsOptional()
-  @IsEmail()
-  email: string;
+  // @IsOptional()
+  // @IsEmail()
+  // email: string;
 
   @IsOptional()
   @IsString()

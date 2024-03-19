@@ -13,9 +13,9 @@ export class User implements IUserData {
   @IsNotEmpty()
   username: string;
 
-  @IsEmail()
-  @IsNotEmpty()
-  email: string;
+  // @IsEmail()
+  // @IsNotEmpty()
+  // email: string;
 
   @IsString()
   @IsNotEmpty()
