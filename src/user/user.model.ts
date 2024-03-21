@@ -3,19 +3,15 @@ import { IsEmail, IsNotEmpty, IsString } from 'class-validator';
 
 export type IUser = PrismaUser;
 
-export type IUserData = Omit<IUser, 'id' | 'createdAt' | 'updatedAt' | 'is_active'>;
+export type IUserData = Omit<IUser, 'id' | 'createdAt' | 'updatedAt' | 'is_active' | 'req_pass_change'>;
 
 export type IUserDataUpdate = Omit<IUserData, 'is_active'>;
 
 export class User implements IUserData {
 
-  @IsString()
+  @IsEmail()
   @IsNotEmpty()
-  username: string;
-
-  // @IsEmail()
-  // @IsNotEmpty()
-  // email: string;
+  email: string;
 
   @IsString()
   @IsNotEmpty()

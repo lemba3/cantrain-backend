@@ -2,6 +2,7 @@ import { ConflictException, Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { IUserData } from './user.model';
 import { HashService } from 'src/auth/hash/hash.service';
+import { ChangePasswordDto } from './dto/change-password.dto';
 
 @Injectable()
 export class UserService {
@@ -13,11 +14,11 @@ export class UserService {
   async createUser(dto: IUserData) {
     const user = await this.prisma.user.findUnique({
       where: {
-        username: dto.username
+        email: dto.email
       }
     });
     if(user) {
-      throw new ConflictException("Username already exist");
+      throw new ConflictException("Email already exist");
     }
     const newUser = await this.prisma.user.create({
       data: {
@@ -29,10 +30,10 @@ export class UserService {
     return result;
   }
 
-  async findUserByUsername(username: string) {
+  async findUserByEmail(email: string) {
     return await this.prisma.user.findUnique({
       where: {
-        username: username
+        email: email
       }
     })
   }
@@ -43,6 +44,18 @@ export class UserService {
         id: id
       }
     })
+  }
+
+  async changePassword(dto: ChangePasswordDto) {
+    const updatedUser = await this.prisma.user.update({
+      where: { email: dto.email },
+      data: {
+        password: await this.hash.hashPassword(dto.password),
+        req_pass_change: false
+      },
+    });
+    const { password, ...result} = updatedUser;
+    return result;
   }
 
 }

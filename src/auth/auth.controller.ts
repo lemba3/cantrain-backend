@@ -4,6 +4,7 @@ import { UserService } from 'src/user/user.service';
 import { LoginDto } from './dto/auth.dto';
 import { AuthService } from './auth.service';
 import { RefreshJwtGuard } from './guards/refresh.guard';
+import { ChangePasswordDto } from 'src/user/dto/change-password.dto';
 
 @Controller('auth')
 export class AuthController {
@@ -26,5 +27,10 @@ export class AuthController {
   @Post('refresh')
   async refreshToken(@Request() req) {
     return await this.authService.refreshToken(req.user);
+  }
+
+  @Post('change-password')
+  async changePassword(@Body() dto: ChangePasswordDto) {
+    return await this.authService.changePassword(dto);
   }
 }

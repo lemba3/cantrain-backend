@@ -6,7 +6,6 @@ import { PrismaModule } from './prisma/prisma.module';
 import { UserModule } from './user/user.module';
 import { HashService } from './auth/hash/hash.service';
 import { AuthModule } from './auth/auth.module';
-import { PrismaService } from './prisma/prisma.service';
 
 @Module({
   imports: [ConfigModule.forRoot(), PrismaModule, UserModule, AuthModule],
