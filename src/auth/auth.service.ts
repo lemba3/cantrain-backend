@@ -44,11 +44,12 @@ export class AuthService {
 
   async changePassword(dto: ChangePasswordDto) {
     const user = await this.userService.changePassword(dto);
-    const backendTokens = await this.generateBackendTokens(user);
-    return {
-      user,
-      backendTokens: backendTokens
-    }
+    // const backendTokens = await this.generateBackendTokens(user);
+    // return {
+    //   user,
+    //   backendTokens: backendTokens
+    // }
+    return user;
   }
 
   async generateBackendTokens(user: any) {
