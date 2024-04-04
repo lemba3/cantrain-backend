@@ -21,6 +21,7 @@ export class JwtGuard implements CanActivate {
         secret: process.env.jwtSecretKey,
       });
       request['user'] = payload;
+      console.log("payloadd", payload)
     } catch {
       throw new UnauthorizedException();
     }

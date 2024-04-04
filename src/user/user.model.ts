@@ -1,5 +1,5 @@
-import { User as PrismaUser } from '@prisma/client';
-import { IsEmail, IsNotEmpty, IsString } from 'class-validator';
+import { $Enums, User as PrismaUser, UserRole } from '@prisma/client';
+import { IsEmail, IsEnum, IsNotEmpty, IsString } from 'class-validator';
 
 export type IUser = PrismaUser;
 
@@ -16,4 +16,7 @@ export class User implements IUserData {
   @IsString()
   @IsNotEmpty()
   password: string;
+
+  @IsEnum(UserRole)
+  role: $Enums.UserRole;
 }

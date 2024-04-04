@@ -53,7 +53,7 @@ export class AuthService {
   }
 
   async generateBackendTokens(user: any) {
-    const payload = { user: user.email };
+    const payload = { user: user.email, role: user.role };
     return {
       accessToken: await this.jwtService.signAsync(payload, {
         expiresIn: TOKEN_EXPIRY,

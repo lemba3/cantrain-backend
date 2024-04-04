@@ -14,10 +14,17 @@ datasource db {
 }
 // models
 
+enum UserRole {
+  ADMIN
+  GUEST
+  REVIEWER
+}
+
 model User {
   id              Int @id @default(autoincrement())
   // name            String
   email           String @unique
+  role            UserRole @default(GUEST)
   password        String
   req_pass_change Boolean @default(true)
   is_active       Boolean  @default(true)
